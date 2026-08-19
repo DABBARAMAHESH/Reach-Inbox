@@ -11,68 +11,34 @@ A full-stack email campaign management platform with scheduling, rate-limiting, 
 
 ---
 
-## 🚀 Deploy to Hugging Face Spaces (Docker)
+## 🚀 Deploy to Render (100% Free, No Credit Card Required)
 
-### Step 1: Get a Free PostgreSQL Database (Neon)
-1. Go to **[https://neon.tech](https://neon.tech)** and sign up for free.
-2. Create a new project (e.g. `reachinbox`).
-3. Copy the **Connection String** — it looks like:
+We can deploy both the frontend and backend services to Render for free.
+
+### Step 1: Create a Free Database & Redis
+1. **Database**: Sign up at **[Neon.tech](https://neon.tech)** (free PostgreSQL). Create a project and copy the connection string:
    ```
    postgresql://user:password@ep-xxx.us-east-1.aws.neon.tech/reachinbox?sslmode=require
    ```
+2. **Queue (Redis)**: Sign up at **[Upstash.com](https://upstash.com)** (free Redis). Create a Redis instance and copy the `rediss://...` connection URL.
 
-### Step 2: Get a Free Redis (Upstash)
-1. Go to **[https://upstash.com](https://upstash.com)** and sign up for free.
-2. Create a new Redis database (choose **Global** for best latency).
-3. Copy the **Redis URL** — it looks like:
-   ```
-   rediss://default:your_password@your-redis.upstash.io:6379
-   ```
+### Step 2: Deploy to Render
+1. Go to **[Render.com](https://render.render.com)** and sign in.
+2. Click **New +** -> **Blueprint**.
+3. Connect your GitHub repository: `DABBARAMAHESH/Reach-Inbox`.
+4. Render will read the `render.yaml` configuration and automatically set up two services:
+   - **`reach-inbox-backend`** (Web Service running the Express API and BullMQ worker)
+   - **`reach-inbox-frontend`** (Static Site hosting the React application)
+5. Fill in the required environment variables in the dashboard setup:
+   - `DATABASE_URL` (your Neon connection string)
+   - `REDIS_URL` (your Upstash Redis URL)
+   - `ENCRYPTION_KEY` (any 32-character random string)
+   - `SYSTEM_SMTP_USER` (your Gmail address)
+   - `SYSTEM_SMTP_PASSWORD` (your Google App Password)
+6. Click **Approve**. Render will build and deploy both services!
 
-### Step 3: Create a Hugging Face Space
-1. Go to **[https://huggingface.co/spaces](https://huggingface.co/spaces)**.
-2. Click **Create new Space**.
-3. Set:
-   - **Space name**: `Reach-Inbox` (or any name)
-   - **SDK**: `Docker`
-   - **Visibility**: Public or Private
-4. Click **Create Space**.
+> **Note**: For the frontend to communicate with the backend, update the destination route in the frontend's static route settings on the dashboard to point to your new backend URL.
 
-### Step 4: Connect Your GitHub Repo
-In your HF Space settings:
-1. Go to **Settings → Repository**.
-2. Link to: `https://github.com/DABBARAMAHESH/Reach-Inbox`
-
-### Step 5: Set Environment Variables (Secrets)
-In your HF Space → **Settings → Variables and Secrets**, add:
-
-| Secret Name | Value |
-|-------------|-------|
-| `DATABASE_URL` | Your Neon PostgreSQL connection string |
-| `REDIS_URL` | Your Upstash Redis URL (`rediss://...`) |
-| `JWT_SECRET` | Any long random string |
-| `ENCRYPTION_KEY` | Exactly 32 characters |
-| `SYSTEM_SMTP_USER` | Your Gmail address |
-| `SYSTEM_SMTP_PASSWORD` | Your Google App Password |
-| `GOOGLE_CLIENT_ID` | From Google Cloud Console |
-| `GOOGLE_CLIENT_SECRET` | From Google Cloud Console |
-| `GOOGLE_CALLBACK_URL` | `https://YOUR_HF_USERNAME-reach-inbox.hf.space/api/auth/google/callback` |
-| `FRONTEND_URL` | `https://YOUR_HF_USERNAME-reach-inbox.hf.space` |
-| `NODE_ENV` | `production` |
-
-> See `.env.hf.example` for a full reference of all variables.
-
-### Step 6: Deploy
-After linking the repo and setting secrets, HF Spaces will automatically:
-1. Pull your repo.
-2. Build the Docker image (multi-stage build: frontend + backend).
-3. Start nginx (port 7860) + Express API + BullMQ worker via supervisord.
-4. Run Prisma migrations automatically on startup.
-
-Your app will be live at:
-```
-https://YOUR_HF_USERNAME-reach-inbox.hf.space
-```
 
 ---
 

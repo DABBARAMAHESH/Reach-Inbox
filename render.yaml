@@ -1,0 +1,38 @@
+services:
+  # ── Backend Web Service (Node.js) ─────────────────────────────────────────
+  - type: web
+    name: reach-inbox-backend
+    env: node
+    plan: free
+    rootDir: apps/backend
+    buildCommand: npm install && npm run build
+    startCommand: node dist/workers/index.js & node dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false # Set this in the Render dashboard (Neon Database URL)
+      - key: REDIS_URL
+        sync: false # Set this in the Render dashboard (Upstash Redis URL)
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ENCRYPTION_KEY
+        sync: false # Set a 32-character key in the dashboard
+      - key: SYSTEM_SMTP_USER
+        sync: false
+      - key: SYSTEM_SMTP_PASSWORD
+        sync: false
+
+  # ── Frontend Static Site ──────────────────────────────────────────────────
+  - type: web
+    name: reach-inbox-frontend
+    env: static
+    plan: free
+    rootDir: apps/frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    routes:
+      # Redirect /api to backend service to avoid CORS issues
+      - type: rewrite
+        path: /api/*
+        destination: https://reach-inbox-backend.onrender.com/api/*
