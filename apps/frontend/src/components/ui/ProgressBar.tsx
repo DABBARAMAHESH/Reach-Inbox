@@ -23,9 +23,9 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         </span>
         {showPercentage && <span>{percentage}%</span>}
       </div>
-      <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden border border-slate-700/50">
+      <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden border border-slate-200 dark:border-slate-700/50">
         <div
-          className="bg-gradient-to-r from-sky-500 to-emerald-400 h-full rounded-full transition-all duration-500 ease-out"
+          className="bg-gradient-to-r from-indigo-500 to-emerald-500 h-full rounded-full transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>

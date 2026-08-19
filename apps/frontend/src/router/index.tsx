@@ -10,7 +10,6 @@ import { Sent } from '../pages/Sent';
 import { Failed } from '../pages/Failed';
 import { Campaigns } from '../pages/Campaigns';
 import { Senders } from '../pages/Senders';
-import { Settings } from '../pages/Settings';
 import { RefreshCw } from 'lucide-react';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -19,7 +18,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   if (isLoading) {
     return (
       <div className="h-screen w-screen bg-slate-950 flex flex-col items-center justify-center text-slate-400">
-        <RefreshCw className="w-8 h-8 animate-spin text-sky-400 mb-3" />
+        <RefreshCw className="w-8 h-8 animate-spin text-indigo-400 mb-3" />
         <p className="text-sm font-medium">Verifying authentication session...</p>
       </div>
     );
@@ -55,7 +54,6 @@ export const AppRouter: React.FC = () => {
           <Route path="failed" element={<Failed />} />
           <Route path="campaigns" element={<Campaigns />} />
           <Route path="senders" element={<Senders />} />
-          <Route path="settings" element={<Settings />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
