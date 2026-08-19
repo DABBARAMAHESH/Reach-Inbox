@@ -1,0 +1,10 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd ../.. && npm install && npm run build --workspace=apps/frontend && npm run build --workspace=apps/backend"
+
+[deploy]
+startCommand = "node apps/backend/dist/server.js"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10

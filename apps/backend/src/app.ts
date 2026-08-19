@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import pinoHttp from 'pino-http';
 import rateLimit from 'express-rate-limit';
+import path from 'path';
+import fs from 'fs';
 
 import { env } from './config/env';
 import { logger } from './config/logger';
@@ -31,7 +33,14 @@ app.use(
 
 app.use(
   cors({
-    origin: [env.FRONTEND_URL, 'http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: [
+      env.FRONTEND_URL,
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://127.0.0.1:3000',
+      /\.railway\.app$/,
+      /\.up\.railway\.app$/
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -89,5 +98,18 @@ app.use('/api/queue', queueRoutes);
 
 // Centralized Error Handling
 app.use(errorHandler);
+
+// ── Serve React Frontend in Production ───────────────────────────────────────
+// In production (Railway), the built React app is served by Express itself
+if (env.NODE_ENV === 'production') {
+  const frontendDist = path.resolve(__dirname, '../../../apps/frontend/dist');
+  if (fs.existsSync(frontendDist)) {
+    app.use(express.static(frontendDist));
+    // For React Router — serve index.html for all non-API routes
+    app.get('*', (_req, res) => {
+      res.sendFile(path.join(frontendDist, 'index.html'));
+    });
+  }
+}
 
 export default app;
