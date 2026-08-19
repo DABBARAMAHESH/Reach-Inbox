@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+.git
+.gitignore
+README.md
+*.log
+coverage
+.DS_Store
+apps/backend/node_modules
+apps/backend/dist
+apps/backend/coverage
+apps/frontend/node_modules
+apps/frontend/dist

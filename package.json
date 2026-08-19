@@ -1,0 +1,35 @@
+{
+  "name": "reachinbox-email-scheduler",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-grade, highly idempotent email scheduling platform with BullMQ & Redis rate-limiting",
+  "workspaces": [
+    "apps/backend",
+    "apps/frontend"
+  ],
+  "scripts": {
+    "dev": "docker compose -f docker-compose.dev.yml up --build",
+    "build": "npm run build --workspace=apps/backend && npm run build --workspace=apps/frontend",
+    "test": "npm run test --workspace=apps/backend",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "docker:ps": "docker compose ps",
+    "seed:1000": "npm run seed:1000 --workspace=apps/backend"
+  },
+  "keywords": [
+    "bullmq",
+    "redis",
+    "email-scheduler",
+    "idempotency",
+    "rate-limiting",
+    "prisma",
+    "react",
+    "express"
+  ],
+  "author": "Engineering Candidate",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^176.0.0"
+  }
+}
