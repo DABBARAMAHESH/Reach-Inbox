@@ -198,7 +198,7 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
       {step === 'form' ? (
         <form onSubmit={handleNextToConfirm} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase mb-1">
+            <label className="block text-xs font-semibold text-slate-300 uppercase mb-1">
               Campaign Subject
             </label>
             <input
@@ -207,19 +207,19 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
               placeholder="e.g. Q3 Product Announcement & Special Offer"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase mb-1">
+              <label className="block text-xs font-semibold text-slate-300 uppercase mb-1">
                 SMTP Sender Identity
               </label>
               <select
                 value={senderId}
                 onChange={(e) => setSenderId(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
               >
                 {senders.length === 0 ? (
                   <option value="">No senders found (Create one in Senders tab)</option>
@@ -234,20 +234,20 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase mb-1">
+              <label className="block text-xs font-semibold text-slate-300 uppercase mb-1">
                 Start Time (UTC)
               </label>
               <input
                 type="datetime-local"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase mb-1">
+            <label className="block text-xs font-semibold text-slate-300 uppercase mb-1">
               Email Body Content
             </label>
             <textarea
@@ -255,18 +255,18 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
               placeholder="Write your email body here..."
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+              className="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
             />
           </div>
 
           {/* Email Attachments section */}
-          <div className="p-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl space-y-3">
+          <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-3">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase">
+              <label className="block text-xs font-semibold text-slate-300 uppercase">
                 📎 Attachments (Max 5MB)
               </label>
               {attachments.length > 0 && (
-                <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                <span className="text-[11px] text-slate-400">
                   Total Size: {Math.round(totalAttachmentsSize / 1024)} KB / 5120 KB
                 </span>
               )}
@@ -277,19 +277,19 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
                 {attachments.map((att, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2 text-xs"
+                    className="flex items-center justify-between bg-slate-800 border border-slate-700 rounded-xl p-2 text-xs"
                   >
                     <div className="flex items-center space-x-2 truncate">
-                      <Paperclip className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400 shrink-0" />
-                      <span className="text-slate-750 dark:text-white truncate font-medium">{att.filename}</span>
-                      <span className="text-[10px] text-slate-500 dark:text-slate-400 shrink-0">
+                      <Paperclip className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                      <span className="text-white truncate font-medium">{att.filename}</span>
+                      <span className="text-[10px] text-slate-400 shrink-0">
                         ({Math.round(att.size / 1024)} KB)
                       </span>
                     </div>
                     <button
                       type="button"
                       onClick={() => removeAttachment(idx)}
-                      className="text-slate-500 hover:text-rose-500 p-1 transition-colors"
+                      className="text-slate-500 hover:text-rose-400 p-1"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -309,7 +309,7 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
               type="button"
               variant="secondary"
               size="sm"
-              leftIcon={<Paperclip className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />}
+              leftIcon={<Paperclip className="w-3.5 h-3.5 text-sky-400" />}
               onClick={() => fileInputRef.current?.click()}
             >
               Attach Files
@@ -317,9 +317,9 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
           </div>
 
           {/* Throttling Controls */}
-          <div className="grid grid-cols-2 gap-4 p-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+          <div className="grid grid-cols-2 gap-4 p-4 bg-slate-900 border border-slate-800 rounded-xl">
             <div>
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase mb-1">
+              <label className="block text-xs font-semibold text-slate-300 uppercase mb-1">
                 Delay Between Emails (seconds)
               </label>
               <input
@@ -328,11 +328,11 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
                 max={300}
                 value={delayBetweenEmails}
                 onChange={(e) => setDelayBetweenEmails(Number(e.target.value))}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 text-sm text-slate-800 dark:text-white"
+                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase mb-1">
+              <label className="block text-xs font-semibold text-slate-300 uppercase mb-1">
                 Hourly Limit (max emails/hr)
               </label>
               <input
@@ -341,27 +341,27 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
                 max={5000}
                 value={hourlyLimit}
                 onChange={(e) => setHourlyLimit(Number(e.target.value))}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 text-sm text-slate-800 dark:text-white"
+                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white"
               />
             </div>
           </div>
 
           {/* Recipients Section */}
           <div className="space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+              <label className="block text-xs font-semibold text-slate-300 uppercase">
                 Recipients List
               </label>
               
               {/* Tab Selector */}
-              <div className="flex bg-slate-100 dark:bg-slate-850 p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+              <div className="flex bg-slate-850 p-0.5 rounded-lg border border-slate-800 text-xs">
                 <button
                   type="button"
                   onClick={() => switchMode('file')}
                   className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all font-medium ${
                     recipientMode === 'file'
-                      ? 'bg-white dark:bg-slate-750 text-indigo-600 dark:text-white shadow-sm'
-                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                      ? 'bg-slate-750 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
                   <Upload className="w-3.5 h-3.5" />
@@ -372,8 +372,8 @@ export const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose }) =
                   onClick={() => switchMode('manual')}
                   className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all font-medium ${
                     recipientMode === 'manual'
-                      ? 'bg-white dark:bg-slate-750 text-indigo-600 dark:text-white shadow-sm'
-                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                      ? 'bg-slate-750 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
                   <Edit3 className="w-3.5 h-3.5" />
@@ -398,16 +398,16 @@ kris@test.com
 mahesh@test.com, krishna@jainuniversity.ac.in`}
                   value={manualText}
                   onChange={(e) => handleManualTextChange(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-250 dark:border-slate-700 rounded-xl p-4 text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-mono transition-colors"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 font-mono"
                 />
                 
                 {csvMetrics && csvMetrics.validCount > 0 && (
                   <div className="flex gap-4 text-xs font-semibold">
-                    <div className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-lg">
+                    <div className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg">
                       🟢 {csvMetrics.validCount} Valid Emails Detected
                     </div>
                     {csvMetrics.duplicateCount > 0 && (
-                      <div className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 rounded-lg">
+                      <div className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-lg">
                         ⚠️ {csvMetrics.duplicateCount} Duplicates Ignored
                       </div>
                     )}
@@ -419,15 +419,15 @@ mahesh@test.com, krishna@jainuniversity.ac.in`}
 
           {/* Completion Time Estimate */}
           {recipients.length > 0 && (
-            <div className="flex items-center justify-between p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl text-xs">
-              <span className="flex items-center text-indigo-600 dark:text-indigo-300">
-                <Clock className="w-4 h-4 mr-2 text-indigo-500 dark:text-indigo-400" /> Estimated Campaign Duration:
+            <div className="flex items-center justify-between p-3 bg-sky-500/10 border border-sky-500/20 rounded-xl text-xs">
+              <span className="flex items-center text-sky-300">
+                <Clock className="w-4 h-4 mr-2 text-sky-400" /> Estimated Campaign Duration:
               </span>
-              <span className="font-bold text-indigo-600 dark:text-indigo-300">{calculateEstimatedHours()}</span>
+              <span className="font-bold text-sky-300">{calculateEstimatedHours()}</span>
             </div>
           )}
 
-          <div className="flex justify-end space-x-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+          <div className="flex justify-end space-x-3 pt-4 border-t border-slate-800">
             <Button variant="ghost" type="button" onClick={onClose}>
               Cancel
             </Button>
@@ -439,43 +439,43 @@ mahesh@test.com, krishna@jainuniversity.ac.in`}
       ) : (
         /* Confirmation Screen */
         <div className="space-y-6">
-          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-3">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-2">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-2">
               Campaign Summary
             </h3>
 
             <div className="grid grid-cols-2 gap-4 text-xs">
               <div>
-                <span className="text-slate-500 dark:text-slate-400 block">Subject:</span>
-                <span className="font-semibold text-slate-800 dark:text-white text-sm">{subject}</span>
+                <span className="text-slate-400 block">Subject:</span>
+                <span className="font-semibold text-white text-sm">{subject}</span>
               </div>
               <div>
-                <span className="text-slate-500 dark:text-slate-400 block">Sender:</span>
-                <span className="font-semibold text-slate-800 dark:text-white text-sm">
+                <span className="text-slate-400 block">Sender:</span>
+                <span className="font-semibold text-white text-sm">
                   {selectedSenderObj?.displayName} ({selectedSenderObj?.email})
                 </span>
               </div>
               <div>
-                <span className="text-slate-500 dark:text-slate-400 block">Recipients Count:</span>
-                <span className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">{recipients.length} valid</span>
+                <span className="text-slate-400 block">Recipients Count:</span>
+                <span className="font-bold text-emerald-400 text-sm">{recipients.length} valid</span>
               </div>
               <div>
-                <span className="text-slate-500 dark:text-slate-400 block">Start Time:</span>
-                <span className="font-semibold text-slate-800 dark:text-white text-sm">
+                <span className="text-slate-400 block">Start Time:</span>
+                <span className="font-semibold text-white text-sm">
                   {new Date(startTime).toLocaleString()}
                 </span>
               </div>
               <div>
-                <span className="text-slate-500 dark:text-slate-400 block">Minimum Send Delay:</span>
-                <span className="font-semibold text-indigo-600 dark:text-indigo-400 text-sm">{delayBetweenEmails} seconds</span>
+                <span className="text-slate-400 block">Minimum Send Delay:</span>
+                <span className="font-semibold text-sky-400 text-sm">{delayBetweenEmails} seconds</span>
               </div>
               <div>
-                <span className="text-slate-500 dark:text-slate-400 block">Hourly Limit:</span>
-                <span className="font-semibold text-amber-600 dark:text-amber-400 text-sm">{hourlyLimit} emails / hr</span>
+                <span className="text-slate-400 block">Hourly Limit:</span>
+                <span className="font-semibold text-amber-400 text-sm">{hourlyLimit} emails / hr</span>
               </div>
-              <div className="col-span-2 border-t border-slate-200 dark:border-slate-800 pt-2">
-                <span className="text-slate-500 dark:text-slate-400 block">Attachments:</span>
-                <span className="font-semibold text-slate-800 dark:text-white text-sm">
+              <div className="col-span-2 border-t border-slate-800 pt-2">
+                <span className="text-slate-400 block">Attachments:</span>
+                <span className="font-semibold text-white text-sm">
                   {attachments.length > 0
                     ? `${attachments.length} files (${Math.round(totalAttachmentsSize / 1024)} KB)`
                     : 'None'}
@@ -483,20 +483,20 @@ mahesh@test.com, krishna@jainuniversity.ac.in`}
               </div>
             </div>
 
-            <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs">
-              <span className="text-slate-500 dark:text-slate-400">Estimated Completion:</span>
-              <span className="font-bold text-indigo-600 dark:text-indigo-400">{calculateEstimatedHours()}</span>
+            <div className="mt-3 pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
+              <span className="text-slate-400">Estimated Completion:</span>
+              <span className="font-bold text-sky-400">{calculateEstimatedHours()}</span>
             </div>
           </div>
 
-          <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-start space-x-2 text-xs text-amber-700 dark:text-amber-300">
-            <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+          <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-start space-x-2 text-xs text-amber-300">
+            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <span>
-              Delayed jobs will be enqueued with deterministic job IDs. All scheduling parameters are restart-safe.
+              BullMQ delayed jobs will be enqueued in Redis with deterministic job IDs. All scheduling parameters are restart-safe.
             </span>
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+          <div className="flex justify-end space-x-3 pt-4 border-t border-slate-800">
             <Button variant="ghost" onClick={() => setStep('form')}>
               Back to Edit
             </Button>

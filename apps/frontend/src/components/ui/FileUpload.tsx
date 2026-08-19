@@ -73,12 +73,12 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onValidated }) => {
         onDragLeave={() => setIsDragging(false)}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
-        className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${
+        className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-colors ${
           isDragging
-            ? 'border-indigo-500 bg-indigo-500/10'
+            ? 'border-sky-500 bg-sky-500/10'
             : validationResult
             ? 'border-emerald-500/50 bg-emerald-500/5'
-            : 'border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 bg-slate-50 dark:bg-slate-800/40'
+            : 'border-slate-700 hover:border-slate-500 bg-slate-800/40'
         }`}
       >
         <input
@@ -95,43 +95,43 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onValidated }) => {
 
         <div className="flex flex-col items-center justify-center space-y-2">
           {isAnalyzing ? (
-            <RefreshCw className="w-8 h-8 text-indigo-500 dark:text-indigo-400 animate-spin" />
+            <RefreshCw className="w-8 h-8 text-sky-400 animate-spin" />
           ) : validationResult ? (
-            <CheckCircle2 className="w-8 h-8 text-emerald-500 dark:text-emerald-400" />
+            <CheckCircle2 className="w-8 h-8 text-emerald-400" />
           ) : (
-            <UploadCloud className="w-8 h-8 text-slate-400 dark:text-slate-500" />
+            <UploadCloud className="w-8 h-8 text-slate-400" />
           )}
 
           <div className="text-sm">
             {fileName ? (
-              <span className="font-semibold text-indigo-600 dark:text-indigo-400">{fileName}</span>
+              <span className="font-semibold text-sky-400">{fileName}</span>
             ) : (
-              <span className="text-slate-600 dark:text-slate-300 font-medium">Click to upload or drag & drop CSV/TXT file</span>
+              <span className="text-slate-300 font-medium">Click to upload or drag & drop CSV file</span>
             )}
           </div>
-          <p className="text-xs text-slate-450 dark:text-slate-500">Supports headers: email, name (Max size: 5MB)</p>
+          <p className="text-xs text-slate-500">Supports headers: email, name (Max size: 5MB)</p>
         </div>
       </div>
 
       {validationResult && (
-        <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-3">
-          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-2">
-            <span>Parsing Summary</span>
-            <span className="text-indigo-600 dark:text-indigo-400">{validationResult.totalRows} Total Rows</span>
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
+          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-2">
+            <span>CSV Parsing Summary</span>
+            <span className="text-sky-400">{validationResult.totalRows} Total Rows</span>
           </div>
 
           <div className="grid grid-cols-3 gap-3 text-center">
             <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-2">
-              <span className="block text-lg font-bold text-emerald-600 dark:text-emerald-400">{validationResult.validCount}</span>
-              <span className="text-[11px] text-emerald-600 dark:text-emerald-300 font-medium">Valid Emails</span>
+              <span className="block text-lg font-bold text-emerald-400">{validationResult.validCount}</span>
+              <span className="text-[11px] text-emerald-300 font-medium">Valid Emails</span>
             </div>
             <div className="bg-rose-500/10 border border-rose-500/20 rounded-lg p-2">
-              <span className="block text-lg font-bold text-rose-600 dark:text-rose-400">{validationResult.invalidCount}</span>
-              <span className="text-[11px] text-rose-600 dark:text-rose-300 font-medium">Invalid Emails</span>
+              <span className="block text-lg font-bold text-rose-400">{validationResult.invalidCount}</span>
+              <span className="text-[11px] text-rose-300 font-medium">Invalid Emails</span>
             </div>
             <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-2">
-              <span className="block text-lg font-bold text-amber-600 dark:text-amber-400">{validationResult.duplicateCount}</span>
-              <span className="text-[11px] text-amber-600 dark:text-amber-300 font-medium">Duplicates Removed</span>
+              <span className="block text-lg font-bold text-amber-400">{validationResult.duplicateCount}</span>
+              <span className="text-[11px] text-amber-300 font-medium">Duplicates Removed</span>
             </div>
           </div>
         </div>
